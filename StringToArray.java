@@ -6,18 +6,19 @@ import java.util.Arrays;
 public class StringToArray {
     public static void main(String args[]) {
 
-        int[] testArr = { 1, 1, 2, 2, 2, 3, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 9, 9, 9, 10, 11, 11, 11, 11, 11, 12, 12, 12, 12,
-                13, 13, 13, 13, 13, 14, 14, 15, 15, 15, 16 };
+        int[] testArr = {1, 1, 2, 2, 2, 3, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 9, 9, 9, 10, 11, 11, 11, 11, 11, 12, 12, 12,
+                12, 13, 13, 13, 13, 13, 14, 14, 15, 15, 15, 16, 16, 16, 17, 18, 17, 19, 16, 20, 20};
         System.out.println("String from test array");
-        System.out.println(serializeToString(testArr));
+        String delimitr = "-";
+        System.out.println(serializeToString(testArr, delimitr));
         System.out.println("----------------------------------------------------------------------");
 
-        String testString = "2x1,3x2,1x3,1x4,3x5,3x6,3x7,3x9,1x10,5x11,4x12,5x13,2x14,3x15,1x16,";
+        String testString = serializeToString(testArr, delimitr);
         System.out.println("Array from test string");
-        System.out.println(serializeToArray(testString));
+        System.out.println(serializeToArray(testString, delimitr));
     }
 
-    private static String serializeToString(int[] arr) {
+    private static String serializeToString(int[] arr, String delimitr) {
         String s = "";
         Map<Integer, Integer> map = new HashMap<>();
 
@@ -32,15 +33,16 @@ public class StringToArray {
 
         for (Integer key : map.keySet()) {
 
-            s += Integer.toString(map.get(key)) + "x" + Integer.toString(key) + ",";
+            s += Integer.toString(map.get(key)) + delimitr + Integer.toString(key) + ",";
         }
+
         s = s.substring(0, s.length() - 1);
-        // System.out.println(s + " " + s.length() + " " + arr.length + " " +
-        // map.size());
+
+        System.out.println(s.length() + " " + arr.length);
         return s;
     }
 
-    private static ArrayList<Integer> serializeToArray(String str) {
+    private static ArrayList<Integer> serializeToArray(String str, String delimiter) {
 
         ArrayList<Integer> list = new ArrayList<>();
 
@@ -50,7 +52,7 @@ public class StringToArray {
 
         for (int i = 0; i < arr.length; i++) {
 
-            String[] temp = arr[i].split("x");
+            String[] temp = arr[i].split(delimiter);
             int count = Integer.parseInt(temp[0]);
             int num = Integer.parseInt(temp[1]);
 
@@ -58,8 +60,7 @@ public class StringToArray {
                 list.add(num);
             }
         }
-        //System.out.println(list);
+        // System.out.println(list);
         return list;
     }
-
 }
