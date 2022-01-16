@@ -34,6 +34,7 @@ public class StringToArray {
 
             s += Integer.toString(map.get(key)) + "x" + Integer.toString(key) + ",";
         }
+        s = s.substring(0, s.length() - 1);
         // System.out.println(s + " " + s.length() + " " + arr.length + " " +
         // map.size());
         return s;
